@@ -1,23 +1,20 @@
 import 'package:dio/dio.dart';
-import '../models/user_model.dart';
+import '../../domain/entities/user.dart';
 
-abstract class UserRemoteDataSource {
-  Future<List<UserModel>> getUsers();
-}
-
-class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+class UserRemoteDataSource {
   final Dio dio;
 
-  UserRemoteDataSourceImpl({required this.dio});
+  UserRemoteDataSource({required this.dio});
 
-  @override
-  Future<List<UserModel>> getUsers() async {
+  Future<List<User>> getUsers() async {
     try {
-      final response = await dio.get('https://jsonplaceholder.typicode.com/users');
+      final response =
+      await dio.get('https://jsonplaceholder.typicode.com/users');
       final List<dynamic> jsonData = response.data;
-      return jsonData.map((user) => UserModel.fromJson(user)).toList();
+      return jsonData.map((user) => User.fromJson(user)).toList();
     } catch (e) {
       throw Exception('Failed to load users');
     }
   }
+
 }

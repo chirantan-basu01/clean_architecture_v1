@@ -1,3 +1,4 @@
+import 'package:clean_architecture/features/users/presentation/bloc/posts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/users/presentation/bloc/user_bloc.dart';
@@ -20,8 +21,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di.sl<UserBloc>(),
+          create: (context) => di.sl<UserBloc>()
         ),
+        BlocProvider(
+          create: (context) => di.sl<PostsBloc>(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

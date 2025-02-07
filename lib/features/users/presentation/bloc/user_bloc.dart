@@ -4,13 +4,13 @@ import '../../domain/entities/user.dart';
 import '../../domain/usecases/get_users.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final GetUsers getUsers;
 
   UserBloc({required this.getUsers}) : super(UserInitial()) {
-
     on<LoadUsers>((event, emit) async {
       emit(UserLoading());
       try {
@@ -20,6 +20,5 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserError('Failed to load users'));
       }
     });
-
   }
 }
